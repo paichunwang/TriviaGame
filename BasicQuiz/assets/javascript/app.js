@@ -2,49 +2,102 @@ window.onload = function () {
     console.log("Document Finished Loading!")
     $("#start").on("click", start);
 
-    var myQuestions = [
-        {
-            question: "What is 1",
+    var advQuestions = [
+        {//Question 1
+            question: "What is Jake?",
             answers: {
-                a: '11',
-                b: '12',
-                c: '13'
+                A: 'Minotaur',
+                B: 'Fish',
+                C: 'Dog'
             },
-            correctAnswer: 'b'
+            correctAnswer: 'C'
         },
-        {
-            question: "What is 2",
+        {//Question 2
+            question: "What is Finn?",
             answers: {
-                a: '12',
-                b: '22',
-                c: '32'
+                A: 'Fish',
+                B: 'Human',
+                C: 'Vampire'
             },
-            correctAnswer: 'c'
+            correctAnswer: 'B'
         },
-        {
-            question: "What is 3",
+        {//Question 3
+            question: "When Marceline moved into Finn and Jake's tree house who moved in with her?",
             answers: {
-                a: '31',
-                b: '32',
-                c: '33'
+                A: 'Her Dad',
+                B: 'Ice King',
+                C: 'Ash'
             },
-            correctAnswer: 'b'
+            correctAnswer: 'C'
         },
-        {
-            question: "What is 4",
+        {//Question 4
+            question: "Who is Finn's Best Friend?",
             answers: {
-                a: '41',
-                b: '42',
-                c: '43'
+                A: 'Jake',
+                B: 'Gunter',
+                C: 'Marelline'
             },
-            correctAnswer: 'b'
+            correctAnswer: 'A'
+        },
+        {//Question 5
+            question: "What is Jakes' ability?",
+            answers: {
+                A: 'Barking',
+                B: 'Stretching',
+                C: 'Walking'
+            },
+            correctAnswer: 'B'
+        },
+        {//Question 6
+            question: "Which is the lyrics intro for 'What am i to you'?",
+            answers: {
+                A: 'How do you see me?',
+                B: 'Do you think im a joke?',
+                C: 'Am i joke, your knight or your brother?'
+            },
+            correctAnswer: 'C'
+        },
+        {//Question 7
+            question: "Does Marceline have parents?",
+            answers: {
+                A: 'Mom',
+                B: 'Dad',
+                C: 'Orphan'
+            },
+            correctAnswer: 'B'
+        },
+        {//Question 8
+            question: "What does Jake like to eat?",
+            answers: {
+                A: 'Pickles and Sandwiches',
+                B: 'Ham',
+                C: 'Egg'
+            },
+            correctAnswer: 'A'
+        },
+        {//Question 9
+            question: "What is Marcelines' Weapon?",
+            answers: {
+                A: 'Base Axe',
+                B: 'Sword',
+                C: 'Knife'
+            },
+            correctAnswer: 'A'
+        },
+        {//Question 10
+            question: "What does Princess Bubblegum like to do?",
+            answers: {
+                A: 'Sport',
+                B: 'Kidnapping Teardrop Candy',
+                C: 'Science'
+            },
+            correctAnswer: 'C'
         },
     ];
 
     var quizQuestion = document.getElementById('quiz');
 
-    makeQuiz(myQuestions);
-    checkQuiz(myQuestions);
+    makeQuiz(advQuestions);
 
     var time = 120;
     var gameRun = false;
@@ -66,7 +119,7 @@ window.onload = function () {
             }
             //combine both the question and answer ready to be display on the HTML
             tempHolder.push(
-                '<div class="question">' + questionPass[i].question + '</div>' + '<div class="answers">' + tempAnswers.join('') + '</div>'
+                '<div class="question">' + questionPass[i].question + '</div>' + '<div class="answers">' + tempAnswers.join('') + '</div><br><br>'
             );
         }
 
@@ -75,28 +128,26 @@ window.onload = function () {
     }
 
     function checkQuiz(questionPast) {
-        // gather answer containers from our quiz
+        //create temp holder for comp user choice v correct answer
         var answerContainers = quizQuestion.querySelectorAll('.answers');
 
-        var userAnswer = '';
+        //place holder for correct answer pull from advQuestions
+        var userAns = '';
         var numCorrect = 0;
         var numWrong = 0;
 
-        // for each question...
         for (var i = 0; i < questionPast.length; i++) {
 
-            // find selected answer
-            userAnswer = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
+            userAns = (answerContainers[i].querySelector('input[name=question' + i + ']:checked') || {}).value;
 
-            // if answer is correct
-            if (userAnswer === questionPast[i].correctAnswer) {
+            if (userAns === questionPast[i].correctAnswer) {
                 numCorrect++;
             }
             else {
                 numWrong++;
             }
         }
-        console.log(numCorrect + " " + numWrong);
+        $(".end").html(`<h1>Correct Answer:</h1> ${numCorrect} <br> <h1>Wrong Answer:</h1> ${numWrong}`);
     }
 
     function start() {
@@ -112,12 +163,12 @@ window.onload = function () {
         time--;
         console.log("Time Remaining: " + time);
         $("#displayTime").text('Time Remaining: ' + time);
-        if (time <= 110) {
+        if (time <= 0) {
             console.log("Game Ended");
-            $("#displayTime").text("-----");
             stop();
-            checkQuiz(myQuestions);
-            
+            checkQuiz(advQuestions);
+            $(".gameOPT").css("visibility", "hidden");
+            $(".end").css("visibility", "visible");
         }
     }
 
@@ -125,15 +176,17 @@ window.onload = function () {
         clearInterval(intervalId);
     }
 
+    //Didn't get to reset
     function reset() {
         time = 120;
         gameRun = false;
     }
 
     function setUp() {
-        $(".gameOPT").css("visibility", "visible");
         $(".start").css("visibility", "hidden");
+        $(".gameOPT").css("visibility", "visible");
         $(".banner").css("background-image", "url('./assets/images/Adventure-Time_Banner_1600x.jpg')");
         $(".banner").css("height", "100px");
+        $(".quiz").css("top", "150px");
     }
 };
