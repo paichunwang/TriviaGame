@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<!-- 
+Psudo Code Stage
+
+What We Need
+-Trivia Game with a Start Button
+-When start is hit, it'll change layout to the game menu and count down begins from 120seconds~
+-Two option can happen; 1. Time run out, game enter automatically what has been chosen and grade, 2. User submit answer
+
+What Can Be Done
+-Use Visable, Invisable attr to show and hide div that are not being used
+-Timer Count Down stop along with the hide of DIV
+-Radio Buttons and Answer Calculation
+-Timer Ends Calls the Answer Calculation Function -->
+
+
+<html>
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Basic Trivia Timed Quiz</title>
+
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/reset.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" media="screen" href="./assets/css/style.css" />
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    <script src="./assets/javascript/app.js"></script>
+
+
+</head>
+
+<body>
+    <div class="container">
+        <div class="col-sm-12 banner"></div>
+        <div class="col-sm-12 start" id="start"><h1>START TRIVIA</h1></div>
+        <div class="col-sm-12 gameOPT time" id="displayTime">Time Remaining</div>
+        <div class="col-sm-12 gameOPT" id="quiz">Questions</div>
+        <div class="col-sm-12 gameEND">Answer</div>
+    </div>
+
+</body>
+
+</html>
